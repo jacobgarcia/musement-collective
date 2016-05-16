@@ -151,6 +151,32 @@ a{
   font-size: 1.3rem !important;
   margin-bottom: 6rem !important;
 }
+.who_title img{
+  width: 30px !important;
+  height: 30px;
+  border-radius: 50% !important;
+  margin-right: 0.3rem;
+}
+.who_title{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.area_comment{
+  border-left: solid 1px #FFF;
+  margin-left: 0.25em;
+  padding-left: 0.5em;
+  margin-bottom: 1rem;
+}
+.comment_text{
+  margin-top: 0.5em;
+}
+input[name=comment_post]{
+  /*padding: 0.3vh;*/
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+}
 form{
   display: flex;
   flex-direction: column;
@@ -163,8 +189,8 @@ input[type=submit]{
   color: white;
   border: 0px solid #000000;
   border-radius: 20px;
-  -moz-border-radius: 30px;
-  -webkit-border-radius: 30px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
 }
 
 input[type=submit]:hover{
