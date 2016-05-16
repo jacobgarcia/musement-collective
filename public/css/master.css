@@ -8,8 +8,9 @@ body{
   margin: 0 auto;
 }
 a{
-  color: #FF5440;
+  color: #FFFFFF !important;
   text-decoration: none;
+  cursor: pointer;
 }
 
 /*Containers*/

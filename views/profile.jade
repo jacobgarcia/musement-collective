@@ -15,7 +15,7 @@ html
           .icon-menu_IconOPEN#menu_button
         #effect-2.effects.clearfix
           .img
-            img(src="#{image}", alt="")
+            img(src="/#{image}", alt="")
             .overlay
               form.profile_form(action='/profile', method='post', enctype="multipart/form-data" )
                 input(type='file', accept="image/jpg, image/jpeg", id='attachement', name="fileName", onchange="this.form.submit()")

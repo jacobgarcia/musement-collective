@@ -1,6 +1,7 @@
 var express = require('express');
 var ObjectId = require('mongodb').ObjectID;
 const multer = require('multer');
+var User = require("models/user.js");
 
 var router = express.Router();
 
@@ -20,14 +21,16 @@ const update = require('config/updatepicture.js');
 /*
  * GET momentlist
  */
-router.get('/momentlist', ensureAuth, (req, res) => {
-  populate.populate({"user":ObjectId(req.user.id)}).exec(function(err, moments) {
+router.get('/:user_id/momentlist', ensureAuth, (req, res) => {
+  populate.populate({"user":ObjectId(req.params.user_id)}).exec(function(err, moments) {
     res.end(JSON.stringify(moments));
   });
 });
 
-router.get('/', ensureAuth, (req, res) => {
-  res.render('profile', {user: req.user.username, image: req.user.image});
+router.get('/:user_id', ensureAuth, (req, res) => {
+  User.findById(req.params.user_id, function(err, user){
+      res.render('profile', {user: user.username, image: user.image});
+  });
 });
 
 router.post('/', ensureAuth, upload.single('fileName'), function(req, res) {
