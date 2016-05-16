@@ -77,8 +77,8 @@ function populateWall(momentlist) {
           /* Comment Section */
           if (this.feedback != '') {
             for(var feed in this.feedback){
-              wallContent += '<div class="area_comment"><div class="comment"><div class="who_title"><img src="'+ this.feedback[feed].user.image+'">';
-              wallContent += this.feedback[feed].user.username;
+              wallContent += '<div class="area_comment"><div class="comment"><div class="who_title"><img src="/'+ this.feedback[feed].user.image+'">';
+              wallContent += '<a href="/profile/' + this.feedback[feed].user._id + '">' + this.feedback[feed].user.username + '</a>';
               wallContent += '</div><div class="comment_text">' + this.feedback[feed].comment +'</div></div></div>';
             }
           }
@@ -86,6 +86,7 @@ function populateWall(momentlist) {
           wallContent += '<input id=' + this._id + 'F class="easy" type="text" name="comment_post" value="" placeholder="Escribe un comentario"></div></article>';
 
           wallContent += '<button type="button" onClick=postComment(\''+ this._id +'\')>Aportar</button>';
+
           // Inject the whole content string into our existing HTML section
           $('#wall').html(wallContent);
 
