@@ -102,8 +102,13 @@ input[name="submits"] {
   -webkit-border-radius: 30px;
 }
 button{
-  border:0;
-  background:none;
+	border: 0;
+	background: none;
+	align-self: right;
+	/* float: right; */
+	margin-right: 1rem;
+	align-self: flex-end;
+	margin-top: 0.3rem;
 }
 .error_moment{
 	margin-top: 7rem;
