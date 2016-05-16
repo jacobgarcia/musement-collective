@@ -26,6 +26,14 @@ var momentSchema = new mongoose.Schema({
   usersHeart: [{
     type: mongoose.Schema.Types.ObjectId, /* Object ID from moment */
     ref: 'Moment' /* Moment Schema. Remember to define it as this in the export module */
+  }],
+  feedback: [{
+    user: {
+      type: mongoose.Schema.Types.ObjectId, /* Object ID from moment */
+      ref: 'User', /* Moment Schema. Remember to define it as this in the export module */
+      required: true
+    },
+    comment: String
   }]
 });
 

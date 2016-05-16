@@ -1,5 +1,6 @@
 // Momentlist data array for filling in info box
 var momentListData = [];
+var user_id, user_username, user_image;
 
 //================================== DOM READY ===============================
 $(document).ready(function() {
@@ -22,12 +23,11 @@ function populateWall(momentlist) {
   /* Temporal computation for speed purposes */
   var timelapse = 0;
 
-  /* User id */
-  var userid;
-
   $.getJSON("/api/user_data", function(user) {
       // Make sure the data contains the username as expected before using it
-      userid = user.userid;
+      user_id = user.user_id;
+      user_image = user.user_image;
+      user_username = user.user_username;
 
       // jQuery AJAX call for JSON
       $.getJSON(momentlist, function(data) {
@@ -43,7 +43,7 @@ function populateWall(momentlist) {
           /* Class depending if it was clickable or not */
          for(var i in usersHeart){
               var id = usersHeart[i];
-              if(id == userid)
+              if(id == user_id)
                 specifiedClass = "icon-heart_red";
           }
 
@@ -73,9 +73,19 @@ function populateWall(momentlist) {
           }
 
           wallContent += '<div class="tipe_moment text"><span class="icon-Comillas-10"></span>' + this.description + '</div>';
-          wallContent += '<div class="area_comment"><div class="comment"><div class="who_title"><img src="'+ this.user.image+'">';
-          wallContent += this.user.username + '</div><div class="comment_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div></div></div>';
-          wallContent += '<input class="easy" type="text" name="comment_post" value="" placeholder="Escribe un comentario"></div></article>';
+
+          /* Comment Section */
+          if (this.feedback != '') {
+            for(var feed in this.feedback){
+              wallContent += '<div class="area_comment"><div class="comment"><div class="who_title"><img src="'+ this.feedback[feed].user.image+'">';
+              wallContent += this.feedback[feed].user.username;
+              wallContent += '</div><div class="comment_text">' + this.feedback[feed].comment +'</div></div></div>';
+            }
+          }
+          wallContent += '<div id=' + this._id + 'DIV></div>'
+          wallContent += '<input id=' + this._id + 'F class="easy" type="text" name="comment_post" value="" placeholder="Escribe un comentario"></div></article>';
+
+          wallContent += '<button type="button" onClick=postComment(\''+ this._id +'\')>Aportar</button>';
           // Inject the whole content string into our existing HTML section
           $('#wall').html(wallContent);
 
@@ -99,12 +109,27 @@ function populateWall(momentlist) {
         });
       });
   });
-
-
-
-
 };
 
+/* POST COMMENT CLICK */
+function postComment(momentId){
+  var comment = $("#" + momentId + "F").val();
+  $.post('home/feed/' + momentId, {comment: comment});
+
+  /* Add a fake POST (for ajax refresh)*/
+  $("#" + momentId + "DIV").append(
+  '<div class="area_comment"><div class="comment"><div class="who_title"><img src="'
+  +  user_image +'">'
+  + user_username
+  + '</div><div class="comment_text">'
+  + comment
+  + '</div></div></div>');
+
+  /* Clean Input Field */
+  $("#" + momentId + "F").val('');
+}
+
+/* HEART CLICK */
 function addHref(clickedID){
   if($("#" + clickedID + "c").prop('className') == "icon-heart_white"){
     $.post('home/vote/' + clickedID, function(){

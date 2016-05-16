@@ -76,7 +76,9 @@ module.exports = function(app, passport) {
           res.json({});
       } else {
           res.json({
-            userid: req.user.id
+            user_id: req.user.id,
+            user_image: req.user.image,
+            user_username: req.user.username
           });
         }
   });

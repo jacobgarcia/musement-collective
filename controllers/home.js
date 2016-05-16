@@ -8,6 +8,7 @@ var upload = multer({
 
 const newMoment = require('config/createmoment.js');
 const heart = require('config/heart.js');
+const feed = require('config/feed.js');
 
 //================================== MIDDLEWARES ===============================
 var Moment = require("models/moment.js");
@@ -18,10 +19,15 @@ const populate = require('helpers/populate.js');
  * GET momentlist
  */
 router.get('/momentlist', ensureAuth, (req, res) => {
-  populate.populate().exec(function(err, moments) {
-    res.end(JSON.stringify(moments));
+  populate.populate().exec(function(err, docs) {
+    Moment.populate(docs, {
+      path: 'feedback.user',
+      model: 'User'
+    },
+    function(err, moments){
+        res.end(JSON.stringify(moments));
+    });
   });
-
 });
 
 router.get('/', ensureAuth, (req, res) => {
@@ -39,6 +45,14 @@ router.post('/', ensureAuth, upload.single('fileName'), function(req, res) {
 /* Heart moment */
 router.post('/vote/:id', ensureAuth, function(req, res){
     heart.heartMoment(req);
+    console.log("Succesful Post");
+
+    return;
+});
+
+/* Give Feedback */
+router.post('/feed/:id', ensureAuth, function(req, res){
+    feed.feedMoment(req);
     console.log("Succesful Post");
 
     return;
