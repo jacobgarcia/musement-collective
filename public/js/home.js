@@ -83,9 +83,9 @@ function populateWall(momentlist) {
             }
           }
           wallContent += '<div id=' + this._id + 'DIV></div>'
-          wallContent += '<input id=' + this._id + 'F class="easy" type="text" name="comment_post" value="" placeholder="Escribe un comentario"></div></article>';
+          wallContent += '<input id=' + this._id + 'F class="easy" type="text" name="comment_post" value="" placeholder="Escribe un comentario"></div>';
 
-          wallContent += '<button type="button" onClick=postComment(\''+ this._id +'\')>Aportar</button>';
+          wallContent += '<button type="button" onClick=postComment(\''+ this._id +'\')>Comentar</button></article>';
           // Inject the whole content string into our existing HTML section
           $('#wall').html(wallContent);
 
