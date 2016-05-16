@@ -75,8 +75,10 @@ function populateWall(momentlist) {
             wallContent += '<img src="' + this.attachement[0] + '".jpg alt=""/>';
           }
 
-          wallContent += '<div class="tipe_moment text"><span class="icon-Comillas-10"></span>' + this.description + '</div></div></article>';
-
+          wallContent += '<div class="tipe_moment text"><span class="icon-Comillas-10"></span>' + this.description + '</div>';
+          wallContent += '<div class="area_comment"><div class="comment"><div class="who_title"><img src="'+ this.user.image+'">';
+          wallContent += this.user.username + '</div><div class="comment_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div></div></div>';
+          wallContent += '<input class="easy" type="text" name="comment_post" value="" placeholder="Escribe un comentario"></div></article>';
           // Inject the whole content string into our existing HTML section
           $('#wall').html(wallContent);
 
