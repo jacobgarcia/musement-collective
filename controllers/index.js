@@ -41,6 +41,10 @@ module.exports = function(app, passport) {
     res.render('profile')
   });
 
+  app.get('/project', ensureAuth, (req, res) => {
+    res.render('project')
+  });
+
   app.get('/login', (req, res) => {
     if(req.isAuthenticated())
       res.render('home');

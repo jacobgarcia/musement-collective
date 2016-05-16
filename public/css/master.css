@@ -170,6 +170,23 @@ a{
 .comment_text{
   margin-top: 0.5em;
 }
+form.new_project{
+  width: 100%;
+  color: black;
+  margin-top: 3rem;
+}
+form.new_project input[type=text]{
+  margin: 1rem;
+  border-radius: 20px;
+}
+form.new_project input[type=button]{
+  margin: 1rem;
+  background: white;
+  width: 100%;
+  border-radius: 20px;
+  border: 0px solid #000000;
+  padding: 1rem;
+}
 input[name=comment_post]{
   /*padding: 0.3vh;*/
   border-radius: 15px;
